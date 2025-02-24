@@ -1,1 +1,1 @@
-[![JAVA OOP LAB](https://img.shields.io/badge/JAVA%20OOP%20LAB-red.svg?style=for-the-badge&logo=java&logoColor=white&labelColor=blue)](https://example.com)
+<img src="https://img.shields.io/badge/JAVA_OOP_LAB-darkblue?style=for-the-badge" alt="Python Lab" width="600" height="50">
