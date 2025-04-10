@@ -1,0 +1,83 @@
+-- 
+-- Roll No: 13
+-- Name: Eswardas K Nair
+-- Program:
+-- 
+
+
+--
+-- Table structure for table books
+--
+
+create table books(accno int primary key auto_increment,title varchar(100) unique not null,author varchar(50) not null,price float(6,2),type ENUM('lending','reference'),availability ENUM('yes','no'),publisherid int);
+
+alter table books add constraint books_fkey_publisherid foreign key(publisherid) references publishers(publisherid);
+
+
+--
+-- Table structure for table publishers
+--
+
+create table publishers(publisherid int primary key auto_increment,name varchar(50) unique not null,address varchar(100));
+
+
+--
+-- Table structure for table members
+--
+
+create table members(memberid int primary key auto_increment,name varchar(50) unique not null,address varchar(100),type ENUM('staff','student'));
+
+
+
+--
+-- Table structure for table issues
+--
+
+create table issues(issueid int primary key auto_increment,memberid int,accno int,issuedate date,duedate date);
+alter table issues add constraint issues_fkey_memberid foreign key(memberid) references members(memberid);
+alter table issues add constraint issues_fkey_accno foreign key(accno) references books(accno);
+--
+-- Table structure for table returns
+--
+
+create table returns(returnid int primary key auto_increment,memberid int,accno int,returndate date,foreign key(memberid) references members(memberid),foreign
+key(accno) references books(accno));
+alter table returns add constraint returns_fkey_memberid foreign key(memberid) references members(memberid);
+alter table returns add constraint returns_fkey_accno foreign key(accno) references books(accno);
+
+
+--
+-- Dumping data for table books
+--
+insert into books(title,author,price,type,availability,publisherid) values("Dracula","Kottayam pushpanath",600.00,'lending','yes',2),("John sick","Fazal",50.00,'reference','no',1),("kayar","Thakazhi",700.00,'lending','yes',3),("Im leend","Sura",1.00,'reference','yes',1),("Doomsday clock","John",100.00,'lending','yes',5);
+
+
+--
+-- Dumping data for table publishers
+--
+insert into publishers(name,address) values("Suku publications","Paris"),("Ramesh books","Kunnamkulam"),("DC books","Kuttippuram"),("Marvel comics","New York"),("DC comics","Washington DC");
+
+
+--
+-- Dumping data for table members
+--
+
+insert into members(name,address,type) values('Appu','Tavanur','student'),('Saran','Pattambi','student'),('Bob','Valayamkulam','staff'),('Kevin','Munnar','staff'),('Lucy','Edappal','staff');
+
+--
+-- Dumping data for table issues
+--
+
+
+
+--
+-- Dumping data for table returns
+--
+
+
+--
+-- SQl Query Statements
+--
+
+-- -----SQL query statments preceeded by the its question-------- # This line may be removed in the actual file
+-- -----Question number should be commented---------------#This line may be removed in the actual file
