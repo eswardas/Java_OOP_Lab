@@ -1,7 +1,7 @@
 -- 
 -- Roll No: 13
 -- Name: Eswardas K Nair
--- Program:
+-- Program: Assignment - I
 -- 
 
 
@@ -10,7 +10,6 @@
 --
 
 create table books(accno int primary key auto_increment,title varchar(100) unique not null,author varchar(50) not null,price float(6,2),type ENUM('lending','reference'),availability ENUM('yes','no'),publisherid int);
-
 alter table books add constraint books_fkey_publisherid foreign key(publisherid) references publishers(publisherid);
 
 
@@ -36,12 +35,12 @@ create table members(memberid int primary key auto_increment,name varchar(50) un
 create table issues(issueid int primary key auto_increment,memberid int,accno int,issuedate date,duedate date);
 alter table issues add constraint issues_fkey_memberid foreign key(memberid) references members(memberid);
 alter table issues add constraint issues_fkey_accno foreign key(accno) references books(accno);
+
 --
 -- Table structure for table returns
 --
 
-create table returns(returnid int primary key auto_increment,memberid int,accno int,returndate date,foreign key(memberid) references members(memberid),foreign
-key(accno) references books(accno));
+create table returns(returnid int primary key auto_increment,memberid int,accno int,returndate date,fine int default 0 check(fine>=0));
 alter table returns add constraint returns_fkey_memberid foreign key(memberid) references members(memberid);
 alter table returns add constraint returns_fkey_accno foreign key(accno) references books(accno);
 
@@ -68,11 +67,14 @@ insert into members(name,address,type) values('Appu','Tavanur','student'),('Sara
 -- Dumping data for table issues
 --
 
-
+insert into issues(memberid,accno,issuedate,duedate) values(1,2,'2024-01-12','2024-01-14'),(2,3,'2025-02-02','2025-02-02'),(3,3,'2024-12-15','2025-01-03'),(1,4,'025-01-01','2025-01-05'),(4,5,'2025-03-15','2025-03-25');
 
 --
 -- Dumping data for table returns
 --
+
+insert into returns(memberid,accno,returndate,fine) values(1,2,'2024-12-12',0),(2,3,'2025-02-02',100),(4,3,'2025-03-02',500),(2,5,'2023-12-02',100),(5,1,'2024-04-15',0);
+
 
 
 --
